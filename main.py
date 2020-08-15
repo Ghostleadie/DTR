@@ -135,8 +135,6 @@ if __name__ == '__main__':
 
                     file1.write("       \"" + input + "\":")
                     file1.write("\n")
-                else:
-                    alert_popup("Conversion Complete", "Your docx to rpy conversion is complete.",folder.getfolderlocation())
 
             elif len(x.runs) > 1:
                 if x.runs[0].text == "T " or x.runs[0].text == "T" or x.runs[0].text == "t" or x.runs[0].text == "t ":
@@ -324,8 +322,8 @@ if __name__ == '__main__':
                     newvar = var.replace(" ", "",1)
                     file1.write("       \"" + newvar + "\":")
                     file1.write("\n")
-            else:
-                alert_popup("Conversion Complete", "Your docx to rpy conversion is complete.", folder.getfolderlocation())
+        file1.close()
+        alert_popup("Conversion Complete", "Your docx to rpy conversion is complete.", folder.getfolderlocation())
 
     B = tkinter.Button(gui, text="Open Word Doc (.docx)", command=docfilename)
     B.pack()
