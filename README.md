@@ -1,4 +1,4 @@
-# DTR
+# DtR
 Word Document (.docx) to renpy script file (.rpy)
 
 ## Usage
