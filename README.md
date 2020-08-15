@@ -24,7 +24,7 @@ T | Character text (with defined caracter) | T N hello there. | N "hello there."
 U | Character text (with undefined caracter) | T boy hello there. | "boy" "hello there."
 L | Label | L Scene1 | label Scene1: 
 I | shows an image with dissolve | I image1 | show bg image1 with dissolve
-II | loads the image | II act1image image1 | image bg act1image = "image1"
+N | loads the image | N act1image image1 | image bg act1image = "image1"
 J | jump to another lable | J Scene2 | jump scene2
 M | Starts a menu | M | menu:
 C | Menu Choice | C Look | "Look":
