@@ -68,260 +68,91 @@ if __name__ == '__main__':
         lines = doc.paragraphs
         inmenu = False
         for x in lines:
-            if len(x.runs) == 1:
-                if firstchar(x.text) == "T " or firstchar(x.text) == "T" or firstchar(x.text) == "t " or firstchar(x.text) == "t":
-                    var = x.text
-                    (call, input) = var.split(None, 1)
-                    (cname, cline) = input.split(None, 1)
-                    if inmenu == False:
-                        file1.write("   " + cname + " \"" + cline + "\"")
-                        file1.write("\n")
-                    elif inmenu == True:
-                        file1.write("           " + cname + " \"" + cline + "\"")
-                        file1.write("\n")
-                elif firstchar(x.text) == "U " or firstchar(x.text) == "U" or firstchar(x.text) == "u" or firstchar(x.text) == "u ":
-                    var = x.text
-                    (call, input) = var.split(None, 1)
-                    (cname, cline) = input.split(None, 1)
-                    if inmenu == False:
-                        file1.write("   " + "\"" + cname + "\"" + " \"" + cline + "\"")
-                        file1.write("\n")
-                    elif inmenu == True:
-                        file1.write("           " + "\"" + cname + "\"" + " \"" + cline + "\"")
-                        file1.write("\n")
-
-                elif firstchar(x.text) == "L " or firstchar(x.text) == "L" or firstchar(x.text) == "l" or firstchar(x.text) == "l ":
-                    var = x.text
-                    (call, input) = var.split(None, 1)
-                    file1.write("label " + input + ":")
+            if x.text == "":
+                file1.write("\n")
+                continue
+            else:
+                var = x.text
+                spacecheck = " "
+                if spacecheck in var:
+                    (shortcut, input) = var.split(None, 1)
+                else:
+                    shortcut = var
+            if shortcut == "T" or shortcut == "t":
+                (cname, cline) = input.split(None, 1)
+                if inmenu == False:
+                    file1.write("   " + cname + " \"" + cline + "\"")
+                    file1.write("\n")
+                elif inmenu == True:
+                    file1.write("           " + cname + " \"" + cline + "\"")
+                    file1.write("\n")
+            elif shortcut == "U" or shortcut == "u":
+                (cname, cline) = input.split(None, 1)
+                if inmenu == False:
+                    file1.write("   " + "\"" + cname + "\"" + " \"" + cline + "\"")
+                    file1.write("\n")
+                elif inmenu == True:
+                    file1.write("           " + "\"" + cname + "\"" + " \"" + cline + "\"")
                     file1.write("\n")
 
-                elif firstchar(x.text) == "I " or firstchar(x.text) == "I" or firstchar(x.text) == "i" or firstchar(x.text) == "i ":
-                    var = x.text
-                    (call, input) = var.split(None, 1)
-                    if inmenu == False:
-                        file1.write("   show bg " + input + " with dissolve")
-                        file1.write("\n")
-                    elif inmenu == True:
-                        file1.write("           show bg " + input + " with dissolve")
-                        file1.write("\n")
+            elif shortcut == "L" or shortcut == "l":
+                file1.write("label " + input + ":")
+                file1.write("\n")
 
-                elif firstchar(x.text) == "N " or firstchar(x.text) == "N" or firstchar(x.text) == "n" or firstchar(x.text) == "n ":
-                    var = x.text
-                    (call, input) = var.split(None, 1)
-                    (iname, image) = input.split(None, 1)
-                    file1.write("image bg " + iname + " = " + "\"" + image + "\"")
+            elif shortcut == "I" or shortcut == "i":
+                if inmenu == False:
+                    file1.write("   show bg " + input + " with dissolve")
+                    file1.write("\n")
+                elif inmenu == True:
+                    file1.write("           show bg " + input + " with dissolve")
                     file1.write("\n")
 
-                elif firstchar(x.text) == "J " or firstchar(x.text) == "J" or firstchar(x.text) == "j" or firstchar(x.text) == "j ":
-                    var = x.text
-                    (call, input) = var.split(None, 1)
-                    #newvar = var.replace(" ", "", 1)
-                    if inmenu == False:
-                        file1.write("   jump " + input)
-                        file1.write("\n")
-                    if inmenu == True:
-                        file1.write("           jump " + input)
-                        file1.write("\n")
-                elif firstchar(x.text) == "M " or firstchar(x.text) == "M" or firstchar(x.text) == "m" or firstchar(x.text) == "m ":
-                    inmenu = True
-                    file1.write("   menu:")
+            elif shortcut == "N" or shortcut == "n":
+                (iname, image) = input.split(None, 1)
+                file1.write("image bg " + iname + " = " + "\"" + image + "\"")
+                file1.write("\n")
+
+            elif shortcut == "J" or shortcut == "j":
+                if inmenu == False:
+                    file1.write("   jump " + input)
                     file1.write("\n")
-                elif firstchar(x.text) == "E " or firstchar(x.text) == "E" or firstchar(x.text) == "e" or firstchar(x.text) == "e ":
-                    inmenu = False
-                elif firstchar(x.text) == "C " or firstchar(x.text) == "C" or firstchar(x.text) == "c" or firstchar(x.text) == "c ":
-                    var = x.text
-                    (call, input) = var.split(None, 1)
-
-                    file1.write("       \"" + input + "\":")
+                if inmenu == True:
+                    file1.write("           jump " + input)
                     file1.write("\n")
-
-            elif len(x.runs) > 1:
-                if x.runs[0].text == "T " or x.runs[0].text == "T" or x.runs[0].text == "t" or x.runs[0].text == "t ":
-                    rl = len(x.runs)
-                    ii = 0
-                    var = ""
-                    while ii < rl:
-
-                        if x.runs[ii].text == "T ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "T":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "t ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "t":
-                            ii += 1
-                            continue
-                        var = var + x.runs[ii].text
-                        ii += 1
-                    (cname, cline) = var.split(None, 1)
-                    if inmenu == False:
-                        file1.write("   " + cname + " \"" + cline + "\"")
-                        file1.write("\n")
-                    elif inmenu == True:
-                        file1.write("           " + cname + " \"" + cline + "\"")
-                        file1.write("\n")
-
-                elif x.runs[0].text == "U " or x.runs[0].text == "U" or x.runs[0].text == "u" or x.runs[0].text == "u ":
-                    rl = len(x.runs)
-                    ii = 0
-                    var = ""
-                    while ii < rl:
-
-                        if x.runs[ii].text == "U ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "U":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "u ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "u":
-                            ii += 1
-                            continue
-                        var = var + x.runs[ii].text
-                        ii += 1
-                    (cname, cline) = var.split(None, 1)
-                    if inmenu == False:
-                        file1.write("   " + "\"" + cname + "\"" + " \"" + cline + "\"")
-                        file1.write("\n")
-                    elif inmenu == True:
-                        file1.write("           " + "\"" + cname + "\"" + " \"" + cline + "\"")
-                        file1.write("\n")
-
-                elif x.runs[0].text == "L " or x.runs[0].text == "L" or x.runs[0].text == "l" or x.runs[0].text == "l ":
-                    rl = len(x.runs)
-                    ii = 0
-                    var = ""
-                    while ii < rl:
-
-                        if x.runs[ii].text == "L ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "L":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "l ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "l":
-                            ii += 1
-                            continue
-                        var = var + x.runs[ii].text
-                        ii += 1
-                    file1.write("label " + var + ":")
+            elif shortcut == "M" or shortcut == "m":
+                inmenu = True
+                file1.write("   menu:")
+                file1.write("\n")
+            elif shortcut == "E" or shortcut == "e":
+                inmenu = False
+            elif shortcut == "C" or shortcut == "c":
+                file1.write("       \"" + input + "\":")
+                file1.write("\n")
+            elif shortcut == "A" or shortcut == "a":
+                if inmenu == False:
+                    file1.write("   play music " + input)
                     file1.write("\n")
-
-                elif x.runs[0].text == "I " or x.runs[0].text == "I" or x.runs[0].text == "i" or x.runs[0].text == "i ":
-                    rl = len(x.runs)
-                    ii = 0
-                    var = ""
-                    while ii < rl:
-
-                        if x.runs[ii].text == "I ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "I":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "i ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "i":
-                            ii += 1
-                            continue
-                        var = var + x.runs[ii].text
-                        ii += 1
-                    if inmenu == False:
-                        file1.write("   show bg " + var + " with dissolve")
-                        file1.write("\n")
-                    elif inmenu == True:
-                        file1.write("           show bg " + var + " with dissolve")
-                        file1.write("\n")
-
-                elif x.runs[0].text == "N " or x.runs[0].text == "N" or x.runs[0].text == "n" or x.runs[0].text == "n ":
-                    rl = len(x.runs)
-                    ii = 0
-                    var = ""
-                    while ii < rl:
-
-                        if x.runs[ii].text == "N ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "N":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "n ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "n":
-                            ii += 1
-                            continue
-                        var = var + x.runs[ii].text
-                        ii += 1
-                    (iname, image) = var.split(None, 1)
-                    file1.write("image bg " + iname + " = " + "\"" + image + "\"")
+                if inmenu == True:
+                    file1.write("           play music " + input)
                     file1.write("\n")
-                elif x.runs[0].text == "J " or x.runs[0].text == "J" or x.runs[0].text == "j" or x.runs[0].text == "j ":
-                    rl = len(x.runs)
-                    ii = 0
-                    var = ""
-                    while ii < rl:
-
-                        if x.runs[ii].text == "J ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "J":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "j ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "j":
-                            ii += 1
-                            continue
-                        var = var + x.runs[ii].text
-                        ii += 1
-                    newvar = var.replace(" ", "", 1)
-                    if inmenu == False:
-                        file1.write("   jump " + newvar)
-                        file1.write("\n")
-                    if inmenu == True:
-                        file1.write("           jump " + newvar)
-                        file1.write("\n")
-                elif x.runs[0].text == "M " or x.runs[0].text == "M" or x.runs[0].text == "m" or x.runs[0].text == "m ":
-                    inmenu = True
-                    file1.write("   menu:")
+            elif shortcut == "AS" or shortcut == "As" or shortcut == "as":
+                if inmenu == False:
+                    file1.write("   stop music")
                     file1.write("\n")
-                elif x.runs[0].text == "E " or x.runs[0].text == "E" or x.runs[0].text == "e" or x.runs[0].text == "e ":
-                    inmenu = False
-                elif x.runs[0].text == "C " or x.runs[0].text == "C" or x.runs[0].text == "c" or x.runs[0].text == "c ":
-                    rl = len(x.runs)
-                    ii = 0
-                    var = ""
-                    while ii < rl:
-
-                        if x.runs[ii].text == "C ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "C":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "c ":
-                            ii += 1
-                            continue
-                        elif x.runs[ii].text == "c":
-                            ii += 1
-                            continue
-                        var = var + x.runs[ii].text
-                        ii += 1
-                    newvar = var.replace(" ", "",1)
-                    file1.write("       \"" + newvar + "\":")
+                if inmenu == True:
+                    file1.write("           stop music")
                     file1.write("\n")
+            elif shortcut == "$":
+                if inmenu == False:
+                    file1.write("   $ " + input)
+                    file1.write("\n")
+                if inmenu == True:
+                    file1.write("           $ " + input)
+                    file1.write("\n")
+            elif shortcut == "V" or shortcut == "v":
+                (vname, video) = input.split(None, 1)
+                file1.write("image bg " + vname + " = Movie(play=" + "\"" + video + "\")")
+
         file1.close()
         alert_popup("Conversion Complete", "Your docx to rpy conversion is complete.", folder.getfolderlocation())
 
