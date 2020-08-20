@@ -25,6 +25,7 @@ if __name__ == '__main__':
         return s[:1]
 
     gui = Tk(className='Renpy convertor')
+    gui.iconbitmap('E:/Documents/GitHub/Repos/DTR/icon.ico')
     # set window size
     gui.geometry("300x200")
 
@@ -137,10 +138,10 @@ if __name__ == '__main__':
                     file1.write("\n")
             elif shortcut == "AS" or shortcut == "As" or shortcut == "as":
                 if inmenu == False:
-                    file1.write("   stop music")
+                    file1.write("   play sound " + input)
                     file1.write("\n")
                 if inmenu == True:
-                    file1.write("           stop music")
+                    file1.write("           play sound " + input)
                     file1.write("\n")
             elif shortcut == "$":
                 if inmenu == False:
