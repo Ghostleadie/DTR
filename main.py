@@ -153,6 +153,9 @@ if __name__ == '__main__':
             elif shortcut == "V" or shortcut == "v":
                 (vname, video) = input.split(None, 1)
                 file1.write("image bg " + vname + " = Movie(play=" + "\"" + video + "\")")
+            elif shortcut == "#" or shortcut == "#":
+                file1.write("#" + input)
+
 
         file1.close()
         alert_popup("Conversion Complete", "Your docx to rpy conversion is complete.", folder.getfolderlocation())
